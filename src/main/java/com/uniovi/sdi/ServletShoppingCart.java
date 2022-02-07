@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +16,7 @@ public class ServletShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart");
-        // No hay carrito, creamos uno y lo insertamos en sesión
+        HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart"); // No hay carrito, creamos uno y lo insertamos en sesión
         if (cart == null) {
             cart = new HashMap<String, Integer>();
             request.getSession().setAttribute("cart", cart);
@@ -27,29 +25,24 @@ public class ServletShoppingCart extends HttpServlet {
         if (product != null) {
             addToShoppingCart(cart, product);
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<HTML>");
-        out.println("<HEAD><TITLE>Tienda SDI: Cesta de la compra</TITLE></HEAD>");
-        out.println("<BODY>");
-        out.println(shoppingCartToHtml(cart) + "<br>");
-        out.println("<a href=\"index.jsp\">Volver</a></BODY></HTML>");
+        // Retornar la vista con parámetro "selectedItems"
+        request.setAttribute("selectedItems", cart);
+        getServletContext().getRequestDispatcher("/cart.jsp").forward(request, response);
     }
 
-    private void addToShoppingCart(HashMap<String, Integer> cart, String productKey){
-        if(cart.get(productKey)==null){
+    private void addToShoppingCart(HashMap<String, Integer> cart, String productKey) {
+        if (cart.get(productKey) == null) {
             cart.put(productKey, Integer.valueOf(1));
-        } else{
+        } else {
             int productCount = (Integer) cart.get(productKey).intValue();
-            cart.put(productKey, Integer.valueOf(productCount+1));
+            cart.put(productKey, Integer.valueOf(productCount + 1));
         }
     }
 
-    private String shoppingCartToHtml(Map<String, Integer> cart){
-        String shoppingCartToHtml="";
-        for(String key:cart.keySet()){
-            shoppingCartToHtml += "<p>["+key+"]"+cart.get(key)+"unidades</p>";
+    private String shoppingCartToHtml(Map<String, Integer> cart) {
+        String shoppingCartToHtml = "";
+        for (String key : cart.keySet()) {
+            shoppingCartToHtml += "<p>[" + key + "]" + cart.get(key) + "unidades</p>";
         }
         return shoppingCartToHtml;
     }
