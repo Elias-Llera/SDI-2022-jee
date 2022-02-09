@@ -16,6 +16,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li class="nav-item"><a class="nav-link" href="AddToShoppingCart">Carrito</a></li>
+            <li class="nav-item "><a class="nav-link" href="products">Productos</a></li>
             <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="admin.jsp">Administrar productos</a></li>
         </ul>

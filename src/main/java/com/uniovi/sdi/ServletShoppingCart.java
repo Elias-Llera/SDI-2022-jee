@@ -16,7 +16,8 @@ public class ServletShoppingCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart"); // No hay carrito, creamos uno y lo insertamos en sesión
+        HashMap<String, Integer> cart = (HashMap<String, Integer>) request.getSession().getAttribute("cart");
+        // No hay carrito, creamos uno y lo insertamos en sesión
         if (cart == null) {
             cart = new HashMap<String, Integer>();
             request.getSession().setAttribute("cart", cart);

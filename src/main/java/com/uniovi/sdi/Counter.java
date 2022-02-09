@@ -1,6 +1,7 @@
 package com.uniovi.sdi;
 
 public class Counter {
+
     private int total;
 
     public int getTotal() {

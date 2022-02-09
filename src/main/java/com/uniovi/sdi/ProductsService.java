@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ProductsService {
+
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<Product>();
         ObjectContainer db = null;

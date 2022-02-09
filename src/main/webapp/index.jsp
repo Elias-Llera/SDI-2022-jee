@@ -21,6 +21,10 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
+                <a class="nav-link" href="products">Productos<span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link" href="login.jsp">Login<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
